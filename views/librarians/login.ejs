@@ -20,19 +20,20 @@
                 <h1 class="heading text-4xl">Login as a Librarian</h1>
 
                 <form action="/librarians/login" method="post">
-                    <div class="">
+
+                    <div class="grid gap-2 mb-6">
                         <label for="email">Email Address</label>
-                        <input type="email" name="email" id="email" required>
+                        <input class="w-max" type="email" name="email" id="email" required>
                     </div>
-                    <br>
 
-                    <div class="">
+                    <div class="grid gap-2 mb-6">
                         <label for="password">Password</label>
-                        <input type="password" name="password" id="password" required>
+                        <input class="w-max" type="password" name="password" id="password" required>
                     </div>
-                    <br>
 
-                    <p>Don't have an account? <a href="/librarians/signup">Sign up here</a>.</p>
+                    <p class="mb-4">Don't have an account? <a href="/librarians/signup"
+                            class="text-blue-600 hover:underline">Sign up
+                            here</a>.</p>
 
                     <button class="btn" type="submit">Login</button>
                 </form>
