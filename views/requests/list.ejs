@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>All Requests</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Book</th>
+                <th>Student</th>
+                <th>Date Requested</th>
+                <th>Book Available</th>
+                <th>Approved</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% requests.forEach(request=> { %>
+                <tr>
+                    <td>
+                        <%= request.title %>
+                    </td>
+                    <td>
+                        <%= request.first_name + ' ' + request.last_name %>
+                    </td>
+                    <td>
+                        <%= new Date(request.date_requested).toDateString() %>
+                    </td>
+                    <td>
+                        <%= request.available ? 'Yes' : 'No' %>
+                    </td>
+                    <td>
+                        <%= request.approved ? 'Yes' : 'No' %>
+                    </td>
+
+                    <td>
+                        <% if (!request.approved && request.available) { %>
+                            <a href="/requests/approve/<%= request.id %>?book=<%= request.book_id %>">Approve</a>
+                            <% } else if (request.approved) { %>
+                                <a href="/requests/remove/<%= request.id %>?book=<%= request.book_id %>">Book
+                                    Returned</a>
+                                <% } %>
+                    </td>
+                </tr>
+                <% }) %>
+        </tbody>
+
+    </table>
+</body>
+
+</html>

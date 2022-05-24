@@ -5,7 +5,10 @@ const expressSession = require('express-session');
 const { flash } = require('express-flash-message');
 
 const mainRouter = require('./routes/index');
-const authRouter = require('./routes/auth');
+const booksRouter = require('./routes/books');
+const requestsRouter = require('./routes/requests');
+const librariansRouter = require('./routes/librarians');
+const studentsRouter = require('./routes/students');
 
 const app = express();
 
@@ -37,8 +40,11 @@ app.use(
 app.use(flash());
 
 // Routes
+app.use('/books', booksRouter);
+app.use('/requests', requestsRouter);
+app.use('/librarians', librariansRouter);
+app.use('/students', studentsRouter);
 app.use('/', mainRouter);
-app.use('/auth', authRouter);
 
 // Error handling
 app.all('*', (req, res, next) => {
