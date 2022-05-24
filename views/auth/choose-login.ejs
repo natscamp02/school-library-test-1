@@ -5,15 +5,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/style.css">
+
     <title>Document</title>
 </head>
 
 <body>
 
-    <div>
-        <a href="/students/login">Login as Student</a>
-        <a href="/librarians/login">Login as Librarian</a>
-    </div>
+    <%- include('../partials/header') %>
+
+        <main class="min-h-screen">
+            <div class="container grid place-content-center h-screen">
+                <h1 class="heading text-4xl text-center mb-16">
+                    Login To Your Account
+                </h1>
+
+                <div class="flex justify-center gap-8">
+                    <a class="text-center" href="/students/login">
+                        <img class="aspect-square h-60 object-cover" src="/images/student.jpg" alt="Student">
+                        <span class="btn -translate-y-1/2">Login as Student</span>
+                    </a>
+
+                    <a class="text-center" href="/librarians/login">
+                        <img class="aspect-square h-60 object-cover" src="/images/librarian.jpg" alt="Librarian">
+                        <span class="btn -translate-y-1/2">Login as Librarian</span>
+                    </a>
+
+                </div>
+            </div>
+        </main>
+
+        <%- include('../partials/footer') %>
+
 </body>
 
 </html>

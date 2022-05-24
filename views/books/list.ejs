@@ -5,46 +5,85 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <title>SHPS</title>
 </head>
 
-<body>
-    <h1>Browse All Books</h1>
+<body class="font-body">
+    <%- include('../partials/header') %>
+        <main>
+            <!-- Cover Section -->
+            <section
+                class="h-screen flex items-center bg-[url('/images/hero-background.jpg')] bg-cover bg-no-repeat bg-bottom"
+                id="hero">
+                <div class="container">
+                    <h1 class="heading font-bold max-w-[20ch] leading-snug">Welcome to
+                        SHPS' Online
+                        Library
+                    </h1>
 
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Genre</th>
-                <th>Author</th>
-                <th>Available</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
+                    <p class="max-w-prose mb-6 leading-normal">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                        Ut repellat
+                        nemo
+                        labore dolorem magnam
+                        doloribus harum corporis culpa adipisci voluptatum!</p>
 
-        <tbody>
-            <% books.forEach(book=> { %>
-                <tr>
-                    <td>
-                        <%= book.title %>
-                    </td>
-                    <td>
-                        <%= book.genre %>
-                    </td>
-                    <td>
-                        <%= book.author %>
-                    </td>
-                    <td>
-                        <%= book.available ? 'Yes' : 'No' %>
-                    </td>
-                    <td>
-                        <a href="/books/request/<%= book.id %>">Request To Borrow</a>
-                    </td>
-                </tr>
-                <% }) %>
-        </tbody>
+                    <a href="#browse" class="btn">View Collection</a>
+                </div>
+            </section>
 
-    </table>
+            <!-- Books -->
+            <section class="min-h-screen py-20 bg-gray-100" id="browse">
+                <div class="container">
+
+                    <h1 class="heading mb-12">Browse All Books</h1>
+
+                    <div class="grid grid-cols-3">
+
+                        <% books.forEach(book=> { %>
+
+                            <div class="p-6 bg-white sm:pr-12 group">
+                                <strong
+                                    class="inline-flex items-center border border-gray-200 rounded relative px-2.5 py-1.5 text-xs font-medium">
+                                    <span class="text-gray-700"> Status: </span>
+
+
+                                    <% if (book.available) { %>
+                                        <span class="text-green-700 ml-1.5">
+                                            Available
+                                        </span>
+                                        <% } else { %>
+                                            <span class="text-red-700 ml-1.5">
+                                                Unavailable
+                                            </span>
+                                            <% } %>
+                                </strong>
+
+
+                                <h2 class="mt-3 text-2xl font-bold">
+                                    <%= book.title %>
+                                </h2>
+
+                                <h3 class="mt-3 text">Written By: <%= book.author %>
+                                </h3>
+
+                                <p class="mt-3 text-sm text-gray-500">
+                                    <%= book.description %>
+                                </p>
+
+                                <a href="/books/request/<%= book.id %>" class="btn mt-8 text-sm">Request To Borrow</a>
+                            </div>
+                            <% }) %>
+
+                    </div>
+                </div>
+            </section>
+        </main>
+
+
+        <%- include('../partials/footer') %>
 </body>
 
 </html>

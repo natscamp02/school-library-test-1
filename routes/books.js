@@ -6,19 +6,20 @@ const router = express.Router();
 
 // Get all books and their associated genres
 router.get('/', (req, res) => {
-	conn.query(
-		'SELECT books.*, book_genres.genre FROM books, book_genres WHERE books.genre_id = book_genres.id',
-		(err, books) => {
-			if (err || books.length <= 0) {
-				if (err) console.log(err);
-				return res.render('books/list', { books: [] });
-			}
+	let sqlQuery = 'SELECT books.*, book_genres.genre FROM books, book_genres WHERE books.genre_id = book_genres.id';
 
-			res.render('books/list', {
-				books,
-			});
+	if (req.query?.search) sqlQuery += " AND books.title LIKE '" + req.query.search + "%'";
+
+	conn.query(sqlQuery, (err, books) => {
+		if (err || books.length <= 0) {
+			if (err) console.log(err);
+			return res.render('books/list', { books: [] });
 		}
-	);
+
+		res.render('books/list', {
+			books,
+		});
+	});
 });
 
 // Create a book loan request

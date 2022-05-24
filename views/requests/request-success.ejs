@@ -5,18 +5,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/style.css">
+
     <title>Document</title>
 </head>
 
 <body>
-    <h1>Your Request Has Been Made</h1>
+    <%- include('../partials/header') %>
 
-    <p>Contact your librarian to approve the request.</p>
+        <main class="min-h-screen pt-28">
+            <div class="container">
+                <h1 class="heading text-4xl">Your Request Has Been Made</h1>
 
-    <p>
-        <a href="/">Back to Homepage</a>
-        <a href="/books">Browse more books</a>
-    </p>
+                <p class="text-gray-600 mb-6">Contact your librarian to approve the request.</p>
+
+                <div class="flex gap-4">
+                    <a class="btn" href="/">Back to Homepage</a>
+                    <a class="btn" href="/books">Browse more books</a>
+                </div>
+            </div>
+        </main>
+
+        <%- include('../partials/footer') %>
+
 </body>
 
 </html>
