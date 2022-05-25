@@ -8,10 +8,10 @@
 
     <link rel="stylesheet" href="/style.css">
 
-    <title>Document</title>
+    <title>Stony Hill Primary School - Book Requests</title>
 </head>
 
-<body>
+<body class="font-body">
 
     <%- include('../partials/header') %>
 
@@ -32,38 +32,48 @@
                     </thead>
 
                     <tbody>
-                        <% requests.forEach(request=> { %>
-                            <tr class="border-b <%= (request.return_date && new Date(request.return_date).getTime() <
-                                Date.now()) ? 'bg-red-200' : '' %>">
-                                <td class="py-2 px-4">
-                                    <%= request.title %>
-                                </td>
-                                <td class="py-2 px-4">
-                                    <%= request.first_name + ' ' + request.last_name %>
-                                </td>
-                                <td class="py-2 px-4">
-                                    <%= new Date(request.date_requested).toDateString() %>
-                                </td>
-                                <td class="py-2 px-4">
-                                    <%= request.available ? ' Yes' : 'No' %>
-                                </td>
-                                <td class="py-2 px-4">
-                                    <%= request.approved ? 'Yes' : 'No' %>
-                                        <%= request.approved ? '(Due: ' + new Date(request.return_date).toDateString()
-                                            + ')' :'' %>
-                                </td>
+                        <% if (requests.length) { %>
 
-                                <td class="py-2 px-4">
-                                    <% if (!request.approved && request.available) { %>
-                                        <a href="/requests/approve/<%= request.id %>?book=<%= request.book_id %>"
-                                            class="btn bg-green-600 py-1 px-2">Approve</a>
-                                        <% } else if (request.approved) { %>
-                                            <a href="/requests/remove/<%= request.id %>?book=<%= request.book_id %>"
-                                                class="btn bg-red-600 py-1 px-2">Remove</a>
-                                            <% } %>
-                                </td>
-                            </tr>
-                            <% }) %>
+                            <% requests.forEach(request=> { %>
+                                <tr class="border-b <%= (request.return_date && new Date(request.return_date).getTime() <
+                                Date.now()) ? 'bg-red-200' : '' %>">
+                                    <td class="py-2 px-4">
+                                        <%= request.title %>
+                                    </td>
+                                    <td class="py-2 px-4">
+                                        <%= request.first_name + ' ' + request.last_name %>
+                                    </td>
+                                    <td class="py-2 px-4">
+                                        <%= new Date(request.date_requested).toDateString() %>
+                                    </td>
+                                    <td class="py-2 px-4">
+                                        <%= request.available ? ' Yes' : 'No' %>
+                                    </td>
+                                    <td class="py-2 px-4">
+                                        <%= request.approved ? 'Yes' : 'No' %>
+                                            <%= request.approved ? '(Due: ' + new
+                                                Date(request.return_date).toDateString() + ')' :'' %>
+                                    </td>
+
+                                    <td class="py-2 px-4">
+                                        <% if (!request.approved && request.available) { %>
+                                            <a href="/requests/approve/<%= request.id %>?book=<%= request.book_id %>"
+                                                class="btn bg-green-600 py-1 px-2">Approve</a>
+                                            <% } else if (request.approved) { %>
+                                                <a href="/requests/remove/<%= request.id %>?book=<%= request.book_id %>"
+                                                    class="btn bg-red-600 py-1 px-2">Remove</a>
+                                                <% } %>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                                    <% } else { %>
+                                        <tr class="border-b ">
+                                            <td class="text-center " colspan="6">
+                                                <h2 class="text-3xl py-2 align-middle">No requests made yet.</h2>.</h2>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+
                     </tbody>
 
                 </table>
